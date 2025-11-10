@@ -117,7 +117,7 @@ Hot reload cocok untuk mengubah tampilan atau isi dalam metode build(), sedangka
 <Summary><b>Tugas 8</b></Summary>
 
 [TUGAS 8]
-
+ 
 1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement() pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
 
 Jawab: Dalam Flutter, sistem navigasi bekerja seperti stack halaman. Ketika membuka halaman baru, Flutter akan mempush halaman baru tsb diatas halaman sebelumnya. Navigator.push() digunakan untuk menambahkan halaman baru di atas tumpukan tsb tanpa menghapus halaman sebelumnya. Halaman lama tetap disimpan di memori, dan pengguna bisa kembali dengan menekan tombol back. Sementara itu, Navigator.pushReplacement() bekerja dnegan mengganti halaman yg sedang ditampilkan dengan halaman baru, bukan menambahkannya di atas tumpukan. Halaman sebelumnya dihapus dari memori, dan pengguna tidak dapat kembali ke sana dengan tombol back. Menggunakan Navigator.pushReplacement() ibarat melakukan pop sekali dan melakukan push halaman baru ke stack. Dalam aplikasi Football Shop, Navigator.push() sebaiknya digunakan pada kasus dmn pengguna masih bisa kembali ke halaman sebelumnya, misal saat berpindah dari Home Page ke Add Product Form Page, pengguna bisa kembali ke beranda jika membatalkan pengisian. Sementara Navigator.pushReplacement() sebaiknya digunakan pada kasus dmn pengguna tidak bisa kembali ke halaman sebelumnya, misal saat menekan tombol Home, pengguna akan diarahkan ke halaman Home tapi tidak bisa ke halaman sebelumnya karena ia sudah di Home.
