@@ -1,6 +1,5 @@
 Muhammad Rafi Sugianto / PBP B / 2406357135
 
-
 <details>
 <Summary><b>Tugas 7</b></Summary>
 
@@ -154,3 +153,4 @@ Jawab: Agar memiliki identitas visual yg konsisten, warna tema disesuaikan mengg
 -----------------------------------------------------------------------------------------------
 
 </details>
+    
