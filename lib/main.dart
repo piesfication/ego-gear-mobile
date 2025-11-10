@@ -1,4 +1,4 @@
-import 'package:ego_gear/menu.dart';
+import 'package:ego_gear/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 void main() {

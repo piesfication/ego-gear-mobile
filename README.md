@@ -2,7 +2,7 @@ Muhammad Rafi Sugianto / PBP B / 2406357135
 
 
 <details>
-<Summary><b>Tugas 2</b></Summary>
+<Summary><b>Tugas 7</b></Summary>
 
 [TUGAS 7]
 
@@ -110,5 +110,47 @@ Jawab: Hot reload di Flutter adalah fitur yg memungkinkan developer melihat peru
 Sementara itu, hot restart akan menjalankan aplikasi ulang dari awal. Flutter akan menghapus seluruh state dan objek yg sudah dibuat di memori, lalu memulai ulang fungsi main(). Akibatnya, semua data sementara hilang, tapi aplikasi benar-benar memuat ulang seluruh logika dan struktur dari awal.
 
 Hot reload cocok untuk mengubah tampilan atau isi dalam metode build(), sedangkan hot restart digunakan untuk melihat perubahan setelah mengubah struktur logika besar seperti variabel global, main(), atau isi initState() yg tidak ikut diperbarui oleh hot reload.
+
+</details>
+
+<details>
+<Summary><b>Tugas 8</b></Summary>
+
+[TUGAS 8]
+
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement() pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
+
+Jawab: Dalam Flutter, sistem navigasi bekerja seperti stack halaman. Ketika membuka halaman baru, Flutter akan mempush halaman baru tsb diatas halaman sebelumnya. Navigator.push() digunakan untuk menambahkan halaman baru di atas tumpukan tsb tanpa menghapus halaman sebelumnya. Halaman lama tetap disimpan di memori, dan pengguna bisa kembali dengan menekan tombol back. Sementara itu, Navigator.pushReplacement() bekerja dnegan mengganti halaman yg sedang ditampilkan dengan halaman baru, bukan menambahkannya di atas tumpukan. Halaman sebelumnya dihapus dari memori, dan pengguna tidak dapat kembali ke sana dengan tombol back. Menggunakan Navigator.pushReplacement() ibarat melakukan pop sekali dan melakukan push halaman baru ke stack. Dalam aplikasi Football Shop, Navigator.push() sebaiknya digunakan pada kasus dmn pengguna masih bisa kembali ke halaman sebelumnya, misal saat berpindah dari Home Page ke Add Product Form Page, pengguna bisa kembali ke beranda jika membatalkan pengisian. Sementara Navigator.pushReplacement() sebaiknya digunakan pada kasus dmn pengguna tidak bisa kembali ke halaman sebelumnya, misal saat menekan tombol Home, pengguna akan diarahkan ke halaman Home tapi tidak bisa ke halaman sebelumnya karena ia sudah di Home.
+
+-----------------------------------------------------------------------------------------------
+
+2. Bagaimana kamu memanfaatkan hierarchy widget seperti Scaffold, AppBar, dan Drawer untuk membangun struktur halaman yang konsisten di seluruh aplikasi?
+
+Jawab: Scaffold digunakan sbg kerangka utama setiap halaman. Scaffold menyediakan struktur dasar interface seprti area untuk AppBar di atas, body di tengah, serta Drawer. Dengan menggunakan Scaffold secara konsisten, setiap halaman dalam aplikasi memiliki tata letak yg seragam dan mudah dikenali pengguna.
+
+AppBar digunakan sebagai elemen navigasi dan identitas halaman. Setiap halaman di aplikasi menampilkan AppBar dengan warna dan gaya yg sama sehingga pengguna merasa berada dalam lingkungan aplikasi yg sama meskipun berpindah halaman.
+
+Drawer dimanfaatkan sebagai menu navigasi global. Drawe ditempatkan di Scaffold, sehingga pengguna dapat mengakses berbagai halaman utama seperti Home, Add Product, dan About dari satu tempat tanpa perlu kembali ke halaman sebelumnya. Drawer membantu menjaga konsistensi navigasi di seluruh aplikasi, karena struktur menunya sama di setiap halaman.
+
+-----------------------------------------------------------------------------------------------
+
+3. Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti Padding, SingleChildScrollView, dan ListView saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.
+
+Jawab: Dalam konteks desain antarmuka, penggunaan layout widget seperti Padding, SingleChildScrollView, dan ListView membuat tampilan form menjadi lebih rapih dan responsif di berbagai ukuran layar.
+
+Padding memberikan jarak antar elemen form sehingga tampilan tidak terlalu rapat dan lebih mudah dibaca. Misalnya, pada aplikasi EGO Gear, setiap input seperti Name, Price, Description, dst dibungkus dengan Padding
+utk memberi jarak antara TextFormField dan elemen lain di sekitarny.
+
+SingleChildScrollView digunakan agar seluruh form bisa discroll ketika isinya lebih panjang dari layar. Ini penting saat form memiliki banyak input field atau ketika keyboard muncul dan menutupi sebagian tampilan. Misalnya, pada aplikasi EGO Gear ketik pengguna melakukan pengisian form pada Create Gear , SingleChildScrollView digunakan agar seluruh form bisa discroll ketika tinggi konten melebihi tinggi layar.
+Tanpa SingleChildScrollView, jika pengguna membuka keyboard atau jika banyak field seperti Name, Price, Description, dst sebagian form akan tidak terlihat.
+
+Listview digunakan saat jika ingin menampilkan banyak item yg tersusun secara vertikal dan bisa langsung discroll, seperti daftar produk atau menu di Drawer. MIsalnya, pada apliksi EGO Gear, Litview digunakan di drawer agar isi drawer bisa discroll jika jumlah item di dalamnya terlalu banyak dan tidak muat di layar.
+-----------------------------------------------------------------------------------------------
+
+4. Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yg konsisten dengan brand toko?
+
+Jawab: Agar memiliki identitas visual yg konsisten, warna tema disesuaikan menggunakan widget ThemeData di MaterialApp. Dengan ThemeData, kita bisa menetapkan warna utama, sekunder, aksen, dst, serta style default untuk berbagai widget seperti AppBar, tombol, dan teks. Hal ini memastikan seluruh halaman aplikasi mengikuti warna dan style yg seragam, sehingga pengguna langsung mengenali identitas visual apliasi tsb.
+
+-----------------------------------------------------------------------------------------------
 
 </details>
