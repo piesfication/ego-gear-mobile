@@ -147,7 +147,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                               child: Text(
                                   cat[0].toUpperCase() + cat.substring(1)),
                             ))
-                        .toList(),
+                        .toList(), 
                     onChanged: (String? newValue) {
                       setState(() {
                         _category = newValue!;

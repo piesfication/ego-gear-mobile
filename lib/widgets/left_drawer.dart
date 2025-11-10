@@ -21,7 +21,7 @@ class LeftDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'EGO Gear',
+                  'EGO Gear', 
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,

@@ -151,6 +151,6 @@ Listview digunakan saat jika ingin menampilkan banyak item yg tersusun secara ve
 Jawab: Agar memiliki identitas visual yg konsisten, warna tema disesuaikan menggunakan widget ThemeData di MaterialApp. Dengan ThemeData, kita bisa menetapkan warna utama, sekunder, aksen, dst, serta style default untuk berbagai widget seperti AppBar, tombol, dan teks. Hal ini memastikan seluruh halaman aplikasi mengikuti warna dan style yg seragam, sehingga pengguna langsung mengenali identitas visual apliasi tsb.
 
 -----------------------------------------------------------------------------------------------
-
+ 
 </details>
     
