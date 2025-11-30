@@ -2,6 +2,12 @@ import 'package:ego_gear/screens/productlist_form.dart';
 import 'package:ego_gear/screens/menu.dart';
 import 'package:flutter/material.dart';
 
+import 'package:ego_gear/screens/product_entry_list.dart';
+
+import 'package:ego_gear/screens/login.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+
 class ItemCard extends StatelessWidget {
   // Menampilkan kartu dengan ikon dan nama.
 
@@ -11,6 +17,7 @@ class ItemCard extends StatelessWidget {
 
   @override 
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       // Menentukan warna latar belakang dari tema aplikasi.
       color: item.color,
@@ -19,7 +26,7 @@ class ItemCard extends StatelessWidget {
 
       child: InkWell(
         // Aksi ketika kartu ditekan.
-        onTap: () {
+        onTap: () async {
           // Menampilkan pesan SnackBar saat kartu ditekan.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -34,6 +41,43 @@ class ItemCard extends StatelessWidget {
                   builder: (context) => const ProductFormPage(),
                 ),
               );
+          }
+
+          if (item.name == "Universal Gear" || item.name == "Personal Gear") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductEntryListPage(filter: item.filter),
+              ),
+            );
+          }
+
+          else if (item.name == "Log Out") {
+              // TODO: Replace the URL with your app's URL and don't forget to add a trailing slash (/)!
+              // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
+              // If you using chrome,  use URL http://localhost:8000
+              
+              final response = await request.logout(
+                  "https://muhammad-rafi42-egogear.pbp.cs.ui.ac.id/auth/logout/");
+              String message = response["message"];
+              if (context.mounted) {
+                  if (response['status']) {
+                      String uname = response["username"];
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("$message See you again, $uname."),
+                      ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginPage()),
+                      );
+                  } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(message),
+                          ),
+                      );
+                  }
+              }
           }
         },
         // Container untuk menyimpan Icon dan Text

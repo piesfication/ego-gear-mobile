@@ -10,9 +10,10 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "B";//kelas 
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Universal Gear", Icons.store, Colors.blue),
-    ItemHomepage("Personal Gear", Icons.inventory, Colors.green),
-    ItemHomepage("Create Gear", Icons.add, Colors.red),
+    ItemHomepage("Universal Gear", Icons.store, Colors.blue, "all"),
+    ItemHomepage("Personal Gear", Icons.inventory, Colors.green, "mine"),
+    ItemHomepage("Create Gear", Icons.add, Colors.red, "create"),
+    ItemHomepage("Log Out", Icons.exit_to_app, Colors.orange, "logout"),
   ];
 
   @override
@@ -139,7 +140,8 @@ class ItemHomepage {
   final String name;
   final IconData icon;
   final Color color;
+  final String filter;
 
-  ItemHomepage(this.name, this.icon, this.color);
+  ItemHomepage(this.name, this.icon, this.color, this.filter);
 }
 

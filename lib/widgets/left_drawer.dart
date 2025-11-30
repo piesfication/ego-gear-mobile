@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ego_gear/screens/menu.dart';
 import 'package:ego_gear/screens/productlist_form.dart';
 
+import 'package:ego_gear/screens/product_entry_list.dart';
+
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
@@ -55,6 +57,7 @@ class LeftDrawer extends StatelessWidget {
                   ));
             },
           ),
+          
           ListTile(
             leading: const Icon(Icons.post_add),
             title: const Text('Create Gear'),
@@ -65,6 +68,30 @@ class LeftDrawer extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const ProductFormPage()),
               );
             },
+          ),
+
+          ListTile(
+              leading: const Icon(Icons.add_reaction_rounded),
+              title: const Text('Universal Gear'),
+              onTap: () {
+                  // Route to product list page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductEntryListPage(filter: "all")),
+                  );
+              },
+          ),
+
+          ListTile(
+              leading: const Icon(Icons.add_reaction_rounded),
+              title: const Text('Personal Gear'),
+              onTap: () {
+                  // Route to product list page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductEntryListPage(filter: "mine")),
+                  );
+              },
           ),
           
         ],

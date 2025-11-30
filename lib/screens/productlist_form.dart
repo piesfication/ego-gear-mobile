@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ego_gear/widgets/left_drawer.dart';
 
+import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:ego_gear/screens/menu.dart';
+
 
 class ProductFormPage extends StatefulWidget {
     const ProductFormPage({super.key});
@@ -28,6 +33,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
 
     @override
     Widget build(BuildContext context) {
+
+      final request = context.watch<CookieRequest>();
 
       return Scaffold(
         appBar: AppBar(
@@ -271,57 +278,112 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.indigo),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Gear berhasil disimpan!'),
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Name: $_name'),
-                                      Text('Price: $_price'),
-                                      Text('Description: $_description'),
-                                      Text('Category: $_category'),
-                                      Text('Thumbnail: $_thumbnail'),
-                                      Text(
-                                          'Is Featured: ${_isFeatured ? "Ya" : "Tidak"}'),
-                                      Text('Stock: $_stock'),
-                                      Text('Brand: $_brand'),
-                                    ],
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
+                      // onPressed: () {
+                      //   if (_formKey.currentState!.validate()) {
+                      //     showDialog(
+                      //       context: context,
+                      //       builder: (context) {
+                      //         return AlertDialog(
+                      //           title: const Text('Gear berhasil disimpan!'),
+                      //           content: SingleChildScrollView(
+                      //             child: Column(
+                      //               crossAxisAlignment:
+                      //                   CrossAxisAlignment.start,
+                      //               children: [
+                      //                 Text('Name: $_name'),
+                      //                 Text('Price: $_price'),
+                      //                 Text('Description: $_description'),
+                      //                 Text('Category: $_category'),
+                      //                 Text('Thumbnail: $_thumbnail'),
+                      //                 Text(
+                      //                     'Is Featured: ${_isFeatured ? "Ya" : "Tidak"}'),
+                      //                 Text('Stock: $_stock'),
+                      //                 Text('Brand: $_brand'),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //           actions: [
+                      //             TextButton(
                                     
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      _formKey.currentState!.reset();
-                                      setState(() {
-                                        _name = "";
-                                        _price = 0;
-                                        _description = "";
-                                        _thumbnail = "";
-                                        _category = "Playmaker";
-                                        _isFeatured = false;
-                                        _stock = 0;
-                                        _brand = "";
-                                      });
+                      //               child: const Text('OK'),
+                      //               onPressed: () {
+                      //                 Navigator.pop(context);
+                      //                 _formKey.currentState!.reset();
+                      //                 setState(() {
+                      //                   _name = "";
+                      //                   _price = 0;
+                      //                   _description = "";
+                      //                   _thumbnail = "";
+                      //                   _category = "Playmaker";
+                      //                   _isFeatured = false;
+                      //                   _stock = 0;
+                      //                   _brand = "";
+                      //                 });
 
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
+                      //               },
+                      //             ),
+                      //           ],
+                      //         );
+                      //       },
+                      //     );
+                      //     // _formKey.currentState!.reset();
+                      //   }
+                      // },
+
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+
+                          // Kirim ke backend Django
+                          final response = await request.postJson(
+                            "https://muhammad-rafi42-egogear.pbp.cs.ui.ac.id/create-flutter/",
+                            jsonEncode({
+                              "name": _name,
+                              "price": _price,
+                              "description": _description,
+                              "category": _category,
+                              "thumbnail": _thumbnail,
+                              "is_featured": _isFeatured,
+                              "stock": _stock,
+                              "brand": _brand,
+                            }),
                           );
-                          // _formKey.currentState!.reset();
+
+                          if (!context.mounted) return;
+
+                          if (response['status'] == 'success') {
+                            // Jika sukses
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Gear successfully saved!"))
+                            );
+
+                            // Reset form
+                            _formKey.currentState!.reset();
+                            setState(() {
+                              _name = "";
+                              _price = 0;
+                              _description = "";
+                              _thumbnail = "";
+                              _category = "Playmaker";
+                              _isFeatured = false;
+                              _stock = 0;
+                              _brand = "";
+                            });
+
+                            // Kembali ke menu
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => MyHomePage()),
+                            );
+
+                          } else {
+                            // Jika gagal
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Something went wrong."))
+                            );
+                          }
                         }
                       },
+
                       child: const Text(
                         "Save",
                         style: TextStyle(color: Colors.white),
